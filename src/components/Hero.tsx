@@ -34,6 +34,9 @@ const Hero: React.FC = () => {
           <a href="#pricing" className="inline-flex items-center justify-center rounded-lg border border-cyan-400/50 px-6 py-3 text-base font-semibold text-cyan-300 hover:bg-cyan-400/20">
             SSI導入の価値を確認
           </a>
+          <a href="#simulation" className="inline-flex items-center justify-center rounded-lg bg-slate-700 px-6 py-3 text-base font-semibold text-slate-200 hover:bg-slate-600">
+            技術資料ダウンロード
+          </a>
         </div>
       </div>
     </section>

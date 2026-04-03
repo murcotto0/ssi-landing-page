@@ -22,6 +22,20 @@ const CTA: React.FC = () => {
           まずは現状評価：5分で完了するリスク分析レポートを無料発行します。
           これにより即時の課題発見と導入計画が可能になります。
         </p>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div className="bg-slate-800/50 p-4 rounded-lg">
+            <div className="text-2xl font-bold text-emerald-400">50+</div>
+            <div className="text-slate-300 text-sm">導入企業数</div>
+          </div>
+          <div className="bg-slate-800/50 p-4 rounded-lg">
+            <div className="text-2xl font-bold text-emerald-400">2週間</div>
+            <div className="text-slate-300 text-sm">平均導入期間</div>
+          </div>
+          <div className="bg-slate-800/50 p-4 rounded-lg">
+            <div className="text-2xl font-bold text-emerald-400">85%</div>
+            <div className="text-slate-300 text-sm">平均改善率</div>
+          </div>
+        </div>
       </div>
     </section>
   );

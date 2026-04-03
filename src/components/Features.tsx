@@ -35,7 +35,7 @@ const Features: React.FC = () => {
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-slate-800/40 backdrop-blur-sm p-7 rounded-2xl border border-slate-700 hover:border-cyan-400 transition-all duration-300">
+            <div key={index} className="bg-slate-800/40 backdrop-blur-sm p-7 rounded-2xl border border-slate-700 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
               <div className="text-5xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
               <p className="text-slate-200 leading-relaxed">{feature.description}</p>
