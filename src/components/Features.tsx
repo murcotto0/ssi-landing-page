@@ -30,6 +30,9 @@ const Features: React.FC = () => {
         <h2 className="text-4xl font-bold text-center text-white mb-16">
           なぜSSIが必要か
         </h2>
+        <div className="mb-8 text-center text-slate-300">
+          旧コピー: 「暗号学的証明」「AI防衛シールド」「自動監査」「W3C VC準拠」「ビルド自動化」「コスト削減」
+        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div key={index} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-cyan-400 transition-all duration-300">

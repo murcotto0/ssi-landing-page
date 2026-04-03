@@ -21,6 +21,9 @@ const CTA: React.FC = () => {
         <p className="text-slate-400 mt-6 text-sm">
           まずは現状評価：5分で完了するリスク分析レポートを無料発行します。
         </p>
+        <p className="text-slate-500 mt-3 text-xs border-l-4 border-cyan-500 pl-3">
+          旧コピー: 無料プランで今すぐ始めましょう。AI時代に負けないデジタル資産を構築。
+        </p>
       </div>
     </section>
   );
