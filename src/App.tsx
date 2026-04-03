@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import Simulation from './components/Simulation';
@@ -8,8 +9,20 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 
 function App() {
+  const { scrollYProgress } = useScroll();
+
+  // 🎨 背景色の変化（ダーク→ライト）
+  const bgColor = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    ["#020617", "#0f172a", "#1e293b", "#334155"]
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+    <motion.div 
+      style={{ backgroundColor: bgColor }}
+      className="min-h-screen text-slate-100"
+    >
       <Hero />
       <Features />
       <Simulation />
@@ -17,7 +30,7 @@ function App() {
       <Testimonials />
       <CTA />
       <Footer />
-    </div>
+    </motion.div>
   );
 }
 
