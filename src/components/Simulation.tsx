@@ -1,6 +1,10 @@
 import React from 'react';
 
 const Simulation: React.FC = () => {
+  const handleSimulation = () => {
+    console.log('Simulation clicked');
+    window.open('https://ssi.metamap.jp/simulator', '_blank');
+  };
   return (
     <section id="simulation" className="py-20 px-4 bg-slate-900">
       <div className="max-w-6xl mx-auto">
@@ -89,9 +93,11 @@ const Simulation: React.FC = () => {
           <p className="text-slate-300 mb-4">
             これらの改善は、実際の導入企業での平均値に基づいています。
           </p>
-          <a href="#cta" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
+          <button 
+            onClick={handleSimulation}
+            className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
             あなたのサイトでシミュレーション
-          </a>
+          </button>
         </div>
       </div>
     </section>

@@ -1,6 +1,14 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const handleNavigation = (url: string) => {
+    console.log(`Footer: Navigating to ${url}`);
+    window.open(url, '_blank');
+  };
+
+  const handleContactEmail = () => {
+    window.location.href = 'mailto:sales@metamap.jp';
+  };
   return (
     <footer className="py-12 px-4 border-t border-slate-700">
       <div className="max-w-6xl mx-auto">
@@ -14,25 +22,25 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">製品</h4>
             <ul className="text-gray-400 text-sm space-y-2">
-              <li><a href="#" className="hover:text-cyan-400">機能</a></li>
-              <li><a href="#" className="hover:text-cyan-400">料金</a></li>
-              <li><a href="#" className="hover:text-cyan-400">API</a></li>
+              <li><button onClick={() => document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-cyan-400">機能</button></li>
+              <li><button onClick={() => document.querySelector('#pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-cyan-400">料金</button></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/api')} className="hover:text-cyan-400">API</button></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-semibold mb-4">サポート</h4>
             <ul className="text-gray-400 text-sm space-y-2">
-              <li><a href="#" className="hover:text-cyan-400">ドキュメント</a></li>
-              <li><a href="#" className="hover:text-cyan-400">ヘルプ</a></li>
-              <li><a href="#" className="hover:text-cyan-400">コミュニティ</a></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/docs')} className="hover:text-cyan-400">ドキュメント</button></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/help')} className="hover:text-cyan-400">ヘルプ</button></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/community')} className="hover:text-cyan-400">コミュニティ</button></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-semibold mb-4">会社</h4>
             <ul className="text-gray-400 text-sm space-y-2">
-              <li><a href="#" className="hover:text-cyan-400">ブログ</a></li>
-              <li><a href="#" className="hover:text-cyan-400">お問い合わせ</a></li>
-              <li><a href="#" className="hover:text-cyan-400">プライバシー</a></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/blog')} className="hover:text-cyan-400">ブログ</button></li>
+              <li><button onClick={handleContactEmail} className="hover:text-cyan-400">お問い合わせ</button></li>
+              <li><button onClick={() => handleNavigation('https://ssi.metamap.jp/privacy')} className="hover:text-cyan-400">プライバシー</button></li>
             </ul>
           </div>
         </div>

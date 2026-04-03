@@ -4,20 +4,33 @@ const CTA: React.FC = () => {
   const [showValueModal, setShowValueModal] = useState(false);
 
   const handleAuditor = () => {
-    // SSIツールキットのAuditorを実行（仮実装）
-    window.open('/ssi-toolkit', '_blank');
+    console.log('Auditor clicked');
+    try {
+      window.open('https://ssi.metamap.jp/ssi-toolkit', '_blank');
+    } catch (error) {
+      console.error('Failed to open Auditor:', error);
+      alert('Auditorが開けませんでした。別途お問い合わせください。');
+    }
   };
 
   const handleValueConfirm = () => {
+    console.log('Value confirmation modal opened');
     setShowValueModal(true);
   };
 
   const handleDownload = () => {
-    // 技術資料ダウンロード（仮実装）
-    const link = document.createElement('a');
-    link.href = '/docs/ARCH.md'; // docsフォルダのファイルをダウンロード
-    link.download = 'technical-guide.md';
-    link.click();
+    console.log('Download initiated');
+    try {
+      const link = document.createElement('a');
+      link.href = 'https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf';
+      link.download = 'SSI-TechnicalGuide.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Download failed:', error);
+      alert('ダウンロードに失敗しました。別途お問い合わせください。');
+    }
   };
 
   return (

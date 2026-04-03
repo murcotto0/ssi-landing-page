@@ -1,6 +1,16 @@
 import React from 'react';
 
 const Pricing: React.FC = () => {
+  const handleCTA = (planName: string) => {
+    console.log(`${planName} plan clicked`);
+    if (planName === 'Basic') {
+      window.open('https://ssi.metamap.jp/signup', '_blank');
+    } else if (planName === 'Standard') {
+      window.open('https://ssi.metamap.jp/trial', '_blank');
+    } else if (planName === 'Enterprise') {
+      window.location.href = 'mailto:sales@metamap.jp?subject=SSI Enterprise Plan Inquiry';
+    }
+  };
   const plans = [
     {
       name: 'Basic',
@@ -69,7 +79,9 @@ const Pricing: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${plan.popular ? 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white' : 'border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900'}`}>
+              <button 
+                onClick={() => handleCTA(plan.name)}
+                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${plan.popular ? 'bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white' : 'border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900'}`}>
                 {plan.cta}
               </button>
             </div>

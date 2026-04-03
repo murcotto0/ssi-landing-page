@@ -10,6 +10,22 @@ const Hero: React.FC = () => {
   // タイトルのY移動
   const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
 
+  const handleHeroAuditor = () => {
+    console.log('Hero: Auditor clicked');
+    window.open('https://ssi.metamap.jp/ssi-toolkit', '_blank');
+  };
+
+  const handleHeroValue = () => {
+    console.log('Hero: Value confirmation');
+    const pricingSection = document.querySelector('#pricing');
+    pricingSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleHeroDocs = () => {
+    console.log('Hero: Download docs');
+    window.open('https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf', '_blank');
+  };
+
   return (
     <motion.section 
       id="hero" 
@@ -69,15 +85,15 @@ const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a href="#features" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
+          <button onClick={handleHeroAuditor} className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
             無料診断Auditorを実行
-          </a>
-          <a href="#pricing" className="inline-flex items-center justify-center rounded-lg border border-cyan-400/50 px-6 py-3 text-base font-semibold text-cyan-300 hover:bg-cyan-400/20">
+          </button>
+          <button onClick={handleHeroValue} className="inline-flex items-center justify-center rounded-lg border border-cyan-400/50 px-6 py-3 text-base font-semibold text-cyan-300 hover:bg-cyan-400/20">
             SSI導入の価値を確認
-          </a>
-          <a href="#simulation" className="inline-flex items-center justify-center rounded-lg bg-slate-700 px-6 py-3 text-base font-semibold text-slate-200 hover:bg-slate-600">
+          </button>
+          <button onClick={handleHeroDocs} className="inline-flex items-center justify-center rounded-lg bg-slate-700 px-6 py-3 text-base font-semibold text-slate-200 hover:bg-slate-600">
             技術資料ダウンロード
-          </a>
+          </button>
         </motion.div>
       </div>
     </motion.section>
