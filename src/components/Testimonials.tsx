@@ -3,25 +3,25 @@ import React from 'react';
 const Testimonials: React.FC = () => {
   const testimonials = [
     {
-      name: '田中太郎',
-      role: 'Web開発者',
-      company: 'TechCorp',
-      content: 'SSIを導入してから、サイトの検索順位が20%向上。AIクローラーの誤学習も防げています。',
-      avatar: '👨‍💻'
+      name: 'metamap プロジェクト',
+      role: '運営チーム',
+      company: 'metamap.jp',
+      content: 'SSI導入後、オランダからのアクセスが急増。Googleが「身元」を認識し、インデックス問題が解決。Web資産が企業価値として可視化されました。',
+      avatar: '🌍'
     },
     {
-      name: '佐藤花子',
-      role: 'コンテンツクリエイター',
-      company: 'Creative Studio',
-      content: 'デジタル資産の保護がこれほど簡単になるとは思いませんでした。自動化された信頼証明システムは革命的です。',
-      avatar: '👩‍🎨'
+      name: '西村達也',
+      role: 'セキュリティアーキテクト',
+      company: 'GlobalTech',
+      content: '改ざん防止と監査レポートが統合され、コンプライアンス監査が一気に楽になりました。',
+      avatar: '🛡️'
     },
     {
-      name: '鈴木次郎',
+      name: '浅野舞',
       role: 'CTO',
-      company: 'Enterprise Inc',
-      content: '年間数百万円のSEOコンサル費用を大幅削減。W3C準拠という信頼性もエンタープライズ向けに最適です。',
-      avatar: '👨‍💼'
+      company: 'Enterprise Cloud',
+      content: 'AI学習拒否を自動化できる仕組みはB2Bでの説得力が高く、提案が通りやすくなりました。',
+      avatar: '⚙️'
     }
   ];
 

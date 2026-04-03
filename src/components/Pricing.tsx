@@ -3,39 +3,39 @@ import React from 'react';
 const Pricing: React.FC = () => {
   const plans = [
     {
-      name: 'Free',
-      price: '$0',
-      period: 'forever',
+      name: 'Basic',
+      price: '¥0',
+      period: '月',
       features: [
-        '5サイトまで',
-        '基本マニフェスト生成',
+        'マニフェスト自動生成',
+        '簡易SSI監査レポート',
         'コミュニティサポート'
       ],
-      cta: '今すぐ始める',
+      cta: '今すぐ無料で始める',
       popular: false
     },
     {
-      name: 'Pro',
-      price: '$9.99',
+      name: 'Standard',
+      price: '¥9,800',
       period: '月',
       features: [
-        '無制限サイト',
-        '自動監査',
-        'メールサポート',
-        'APIアクセス'
+        '無制限プロジェクト',
+        'AI防衛ポリシー自動適用',
+        'E-E-A-T自動強化',
+        '法務コンプライアンス自動化'
       ],
-      cta: 'Proにアップグレード',
+      cta: '無料トライアル開始',
       popular: true
     },
     {
       name: 'Enterprise',
-      price: '$49.99',
-      period: '月',
+      price: '要見積',
+      period: '',
       features: [
-        'すべて',
-        'カスタム統合',
-        '優先サポート',
-        'ホワイトラベル'
+        '専用SI',
+        'SLA保証',
+        '優先対応',
+        'カスタムSIEM連携'
       ],
       cta: 'お問い合わせ',
       popular: false
