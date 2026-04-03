@@ -12,23 +12,21 @@ const Hero: React.FC = () => {
           🛡️ AI時代のWeb資産標準
         </p>
         <div className="mt-5 space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-sky-300">
-            旧: Webの「登記」が <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">未来を変える</span>
-          </h1>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
-            新: あなたのWebサイトは、
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight">
+            あなたのWebサイトは、
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-300">
               登記されていない不動産と同じです。
             </span>
           </h1>
+          <h2 className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+            SSI（Standard-SEC）は、AI時代の「真贋判定」基準を提供します。SSLだけでは守れないデジタル資産を、改ざん不可能な公証原則で守り抜くウェブ登記システム。
+          </h2>
         </div>
         <p className="mt-6 text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
           Search Consoleにインデックスされても、Googleに「真贋」を確証させなければ価値はゼロ。
           SSL（HTTPS）の次に必要な信頼基盤として、SSI（Standard-SEC）が改ざん不可能なデジタル登記簿を実装します。
         </p>
-        <p className="mt-4 text-sm text-slate-400 max-w-3xl mx-auto border-l-4 border-emerald-400 pl-4">
-          旧: AI時代のWeb資産を守る。W3C準拠のデジタル登記システムで、検索エンジンと健全な対話を実現。
-        </p>
+
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#features" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
             無料診断Auditorを実行

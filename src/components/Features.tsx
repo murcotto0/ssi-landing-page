@@ -27,18 +27,18 @@ const Features: React.FC = () => {
   return (
     <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-white mb-16">
-          なぜSSIが必要か
+        <h2 className="text-4xl font-bold text-center text-white mb-4">
+          なぜSSIがB2Bで必須なのか
         </h2>
-        <div className="mb-8 text-center text-slate-300">
-          旧コピー: 「暗号学的証明」「AI防衛シールド」「自動監査」「W3C VC準拠」「ビルド自動化」「コスト削減」
-        </div>
+        <p className="text-center text-slate-300 mb-12 max-w-3xl mx-auto">
+          信頼と安全性が競争優位になる時代、SSIは「真贋判定」「AI学習拒否」「信頼ドキュメント公証」などを一気通貫で自動化し、エンタープライズの安心運用を実現します。
+        </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-cyan-400 transition-all duration-300">
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-              <p className="text-gray-300">{feature.description}</p>
+            <div key={index} className="bg-slate-800/40 backdrop-blur-sm p-7 rounded-2xl border border-slate-700 hover:border-cyan-400 transition-all duration-300">
+              <div className="text-5xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+              <p className="text-slate-200 leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
