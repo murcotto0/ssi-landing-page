@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "generate-pdf": "python scripts/generate_pdf.py",
-    "prebuild": "npm run generate-pdf"
+    "prebuild": "pip install -r requirements.txt && npm run generate-pdf || echo 'PDF generation skipped'"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
