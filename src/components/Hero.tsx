@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
 
   const handleHeroDocs = () => {
     console.log('Hero: Download docs');
-    window.open('https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf', '_blank');
+    window.open(`https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf?v=${Date.now()}`, '_blank');
   };
 
   return (
@@ -83,17 +83,20 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          className="mt-10"
         >
-          <button onClick={handleHeroAuditor} className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-3 text-base font-semibold text-slate-900 shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]">
-            無料診断Auditorを実行
-          </button>
-          <button onClick={handleHeroValue} className="inline-flex items-center justify-center rounded-lg border border-cyan-400/50 px-6 py-3 text-base font-semibold text-cyan-300 hover:bg-cyan-400/20">
-            SSI導入の価値を確認
-          </button>
-          <button onClick={handleHeroDocs} className="inline-flex items-center justify-center rounded-lg bg-slate-700 px-6 py-3 text-base font-semibold text-slate-200 hover:bg-slate-600">
-            技術資料ダウンロード
-          </button>
+          <p className="text-slate-400 mb-4">詳細はスクロールして下部の証明・導入価値・資料セクションをご覧ください。</p>
+          <div className="flex justify-center">
+            <button
+              onClick={() => {
+                const ctaSection = document.querySelector('#cta');
+                ctaSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center justify-center rounded-full border border-cyan-400/50 bg-slate-900/70 px-8 py-3 text-base font-semibold text-cyan-200 shadow-lg shadow-cyan-500/10 transition hover:-translate-y-0.5 hover:bg-slate-800"
+            >
+              導入価値と資料を下まで確認する
+            </button>
+          </div>
         </motion.div>
       </div>
     </motion.section>

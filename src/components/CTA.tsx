@@ -22,7 +22,7 @@ const CTA: React.FC = () => {
     console.log('Download initiated');
     try {
       const link = document.createElement('a');
-      link.href = 'https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf';
+      link.href = `https://ssi.metamap.jp/docs/SSI-TechnicalGuide.pdf?v=${Date.now()}`;
       link.download = 'SSI-TechnicalGuide.pdf';
       document.body.appendChild(link);
       link.click();
@@ -34,7 +34,7 @@ const CTA: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-slate-850 border-t border-slate-700">
+    <section id="cta" className="py-20 px-4 bg-slate-850 border-t border-slate-700">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
           いまこそ、Web資産を登記し、真贋を証明する

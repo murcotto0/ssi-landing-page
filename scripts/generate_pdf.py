@@ -1,158 +1,133 @@
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
-from reportlab.lib.units import inch
 import os
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageFont
 
-def create_pdf():
-    os.makedirs("public/docs", exist_ok=True)
-    doc = SimpleDocTemplate("public/docs/SSI-TechnicalGuide.pdf", pagesize=letter)
-    styles = getSampleStyleSheet()
+FONT_PATHS = [
+    Path('C:/Windows/Fonts/meiryo.ttc'),
+    Path('C:/Windows/Fonts/msgothic.ttc'),
+    Path('C:/Windows/Fonts/YuGothR.ttc'),
+    Path('C:/Windows/Fonts/YuGothM.ttc'),
+    Path('C:/Windows/Fonts/YuGothB.ttc'),
+]
 
-    # Custom styles
-    title_style = ParagraphStyle(
-        'Title',
-        parent=styles['Title'],
-        fontSize=24,
-        spaceAfter=30,
-        alignment=1  # Center
-    )
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / 'public' / 'docs'
+PDF_PATH = OUTPUT_DIR / 'SSI-TechnicalGuide.pdf'
+PAGE_SIZE = (2480, 3508)
+BACKGROUND = (15, 23, 42)
+TEXT_COLOR = (226, 232, 240)
+ACCENT = (34, 211, 238)
+HIGHLIGHT = (16, 185, 129)
 
-    heading_style = ParagraphStyle(
-        'Heading',
-        parent=styles['Heading1'],
-        fontSize=16,
-        spaceAfter=20,
-        textColor='#2c3e50'
-    )
 
-    normal_style = styles['Normal']
-    normal_style.fontSize = 12
-    normal_style.leading = 16
+def find_font():
+    for font_path in FONT_PATHS:
+        if font_path.exists():
+            return font_path
+    return None
 
-    bullet_style = ParagraphStyle(
-        'Bullet',
-        parent=normal_style,
-        leftIndent=20,
-        bulletIndent=10
-    )
 
-    story = []
+def build_fonts(font_path):
+    default_font = ImageFont.load_default()
+    return {
+        'title': ImageFont.truetype(font_path, 72) if font_path else default_font,
+        'subtitle': ImageFont.truetype(font_path, 42) if font_path else default_font,
+        'heading': ImageFont.truetype(font_path, 38) if font_path else default_font,
+        'section': ImageFont.truetype(font_path, 34) if font_path else default_font,
+        'body': ImageFont.truetype(font_path, 26) if font_path else default_font,
+        'small': ImageFont.truetype(font_path, 22) if font_path else default_font,
+    }
 
-    # Title
-    story.append(Paragraph("SSI技術ガイド：Web資産の真正性証明と信頼性向上", title_style))
-    story.append(Spacer(1, 12))
 
-    # Introduction
-    story.append(Paragraph("はじめに：デジタル資産の真正性問題", heading_style))
-    story.append(Paragraph("現代のデジタル経済において、Webサイトやデジタルコンテンツの真正性は企業価値の重要な要素です。しかし、コンテンツの改ざん、フェイクニュース、知的財産の盗用といったリスクが日々増加しています。", normal_style))
-    story.append(Paragraph("SSI（Self-Sovereign Identity）技術は、これらの課題を解決するための革新的なソリューションです。本ガイドでは、SSIの技術概要と導入による価値について詳しく解説します。", normal_style))
-    story.append(Spacer(1, 12))
+def create_page_one(fonts):
+    img = Image.new('RGB', PAGE_SIZE, BACKGROUND)
+    draw = ImageDraw.Draw(img)
+    padding = 120
 
-    # What is SSI
-    story.append(Paragraph("SSIとは？", heading_style))
-    story.append(Paragraph("SSIは、個人が自身のデジタルアイデンティティを自己主権的に管理できる技術です。ブロックチェーン技術を基盤とし、信頼できる第三者機関を介さずに真正性を証明できます。", normal_style))
-    story.append(Spacer(1, 6))
+    draw.rectangle([padding, padding, PAGE_SIZE[0] - padding, padding + 360], fill=(10, 25, 47))
+    draw.text((padding + 30, padding + 40), 'SSI技術ガイド：Web資産の真正性証明と信頼性向上', fill=TEXT_COLOR, font=fonts['title'])
+    draw.text((padding + 30, padding + 140), '無料診断Auditorと導入価値を、読みやすい技術資料で確認できます。', fill=ACCENT, font=fonts['subtitle'])
+    draw.text((padding + 30, padding + 210), '5分で完了するリスク分析レポートで、導入判断をサポートします。', fill=HIGHLIGHT, font=fonts['body'])
 
-    # Features
-    story.append(Paragraph("<b>主な特徴：</b>", normal_style))
-    features = [
-        "分散型：中央集権的な管理を必要としない",
-        "自己主権的：ユーザーが自身のデータをコントロール",
-        "検証可能：第三者による真正性確認が可能"
+    body = [
+        '■ はじめに：デジタル資産の真正性問題',
+        '現代のWebでは、改ざん、偽造、AIによる無断利用が急増しています。',
+        'SSIはWeb資産の信頼性を技術的に担保し、導入意思決定を迅速化します。',
+        '',
+        '■ SSIとは？',
+        '自己主権型デジタルIDをベースに、Web資産の真贋を検証できる仕組みです。',
+        '主な特徴：分散型、自己主権、検証可能。'
     ]
-    for feature in features:
-        story.append(Paragraph(f"• {feature}", bullet_style))
-    story.append(Spacer(1, 12))
 
-    # Application
-    story.append(Paragraph("Web資産への適用", heading_style))
-    story.append(Paragraph("SSI技術をWeb資産（Webサイト、コンテンツ、デジタル証明書）に適用することで、以下の効果が得られます：", normal_style))
-    applications = [
-        "<b>真正性証明：</b>コンテンツの作成者と作成時刻を証明",
-        "<b>改ざん検知：</b>コンテンツの変更を即座に検知",
-        "<b>信頼性向上：</b>ユーザーの信頼を獲得",
-        "<b>コンプライアンス対応：</b>規制要件への対応"
+    y = padding + 460
+    for line in body:
+        if line.startswith('■'):
+            draw.text((padding, y), line, fill=ACCENT, font=fonts['heading'])
+            y += 70
+        else:
+            draw.text((padding + 30, y), line, fill=TEXT_COLOR, font=fonts['body'])
+            y += 55
+
+    y += 20
+    cards = [
+        ('リスク低減', '改ざんと偽造を防ぎ、85%以上の信頼性向上を狙います。'),
+        ('業務効率化', '監査と真正性チェックを自動化し、導入期間を平均2週間に短縮。'),
+        ('競争優位性', '信頼性を証明したWeb資産で市場での差別化を実現。'),
     ]
-    for app in applications:
-        story.append(Paragraph(f"• {app}", bullet_style))
-    story.append(Spacer(1, 12))
+    card_width = 540
+    for i, (heading, text) in enumerate(cards):
+        x = padding + i * (card_width + 40)
+        draw.rectangle([x, y, x + card_width, y + 240], fill=(15, 35, 59))
+        draw.text((x + 30, y + 30), heading, fill=HIGHLIGHT, font=fonts['section'])
+        draw.text((x + 30, y + 110), text, fill=TEXT_COLOR, font=fonts['body'])
 
-    # Value
-    story.append(Paragraph("導入の価値", heading_style))
+    return img
 
-    story.append(Paragraph("<b>1. リスク低減</b>", normal_style))
-    story.append(Paragraph("コンテンツ改ざんによる法的リスクやブランドイメージの損失を防ぎます。平均85%のリスク低減効果が確認されています。", normal_style))
-    story.append(Spacer(1, 6))
 
-    story.append(Paragraph("<b>2. 業務効率化</b>", normal_style))
-    story.append(Paragraph("手動での真正性確認作業を自動化。導入企業では平均2週間の業務効率化を実現しています。", normal_style))
-    story.append(Spacer(1, 6))
+def create_page_two(fonts):
+    img = Image.new('RGB', PAGE_SIZE, BACKGROUND)
+    draw = ImageDraw.Draw(img)
+    padding = 120
 
-    story.append(Paragraph("<b>3. 競争優位性</b>", normal_style))
-    story.append(Paragraph("信頼できるデジタル資産を持つ企業は、市場での優位性を確立できます。50社以上の導入企業が競争力を向上させています。", normal_style))
-    story.append(Spacer(1, 12))
+    draw.text((padding, padding), '■ 技術アーキテクチャ', fill=ACCENT, font=fonts['heading'])
+    draw.text((padding, padding + 80), 'DID / Verifiable Credentials / SSI Toolkitの三層構造で、', fill=TEXT_COLOR, font=fonts['body'])
+    draw.text((padding, padding + 140), 'Web資産の真正性証明と検証を同時に実現します。', fill=TEXT_COLOR, font=fonts['body'])
 
-    # Architecture
-    story.append(Paragraph("技術アーキテクチャ", heading_style))
-
-    story.append(Paragraph("<b>主要コンポーネント</b>", normal_style))
-    components = [
-        "<b>DID（Decentralized Identifier）：</b>分散型識別子",
-        "<b>Verifiable Credentials：</b>検証可能な資格情報",
-        "<b>SSI Toolkit：</b>実装支援ツール"
+    y = padding + 240
+    steps = [
+        '1. リスク分析：現状のWeb資産を評価',
+        '2. SSI設定：DIDと資格情報を設定',
+        '3. 統合：既存システムへ組み込み',
+        '4. 検証：真正性証明をテスト'
     ]
-    for comp in components:
-        story.append(Paragraph(f"• {comp}", bullet_style))
-    story.append(Spacer(1, 6))
+    for step in steps:
+        draw.rectangle([padding, y, padding + 220, y + 220], fill=(10, 25, 47))
+        draw.text((padding + 30, y + 30), step, fill=ACCENT, font=fonts['body'])
+        y += 280
 
-    story.append(Paragraph("<b>実装フロー</b>", normal_style))
-    flow = [
-        "リスク分析：現在のWeb資産を評価",
-        "SSI設定：DIDと資格情報の設定",
-        "統合：既存システムへの組み込み",
-        "検証：真正性証明のテスト"
-    ]
-    for i, step in enumerate(flow, 1):
-        story.append(Paragraph(f"{i}. {step}", bullet_style))
-    story.append(Spacer(1, 12))
+    draw.text((padding, y), '■ 導入事例', fill=ACCENT, font=fonts['heading'])
+    draw.text((padding, y + 80), '・大手金融機関：フィッシング攻撃を90%低減、取引量15%増', fill=TEXT_COLOR, font=fonts['body'])
+    draw.text((padding, y + 140), '・メディア企業：読者エンゲージメント25%向上、信頼性を可視化', fill=TEXT_COLOR, font=fonts['body'])
 
-    # Case Studies
-    story.append(Paragraph("導入事例", heading_style))
-    story.append(Paragraph("<b>事例1：大手金融機関</b><br/>Webサイトの真正性証明により、フィッシング攻撃を90%低減。顧客信頼度が向上し、取引量が15%増加。", normal_style))
-    story.append(Spacer(1, 6))
-    story.append(Paragraph("<b>事例2：メディア企業</b><br/>ニュースコンテンツの真正性証明により、フェイクニュース対策として活用。読者エンゲージメントが25%向上。", normal_style))
-    story.append(Spacer(1, 12))
+    footer_y = PAGE_SIZE[1] - 240
+    draw.text((padding, footer_y), '無料診断Auditorで今すぐリスク分析を開始！', fill=HIGHLIGHT, font=fonts['section'])
+    draw.text((padding, footer_y + 80), '5分で完了するレポートで、導入の価値を実感してください。', fill=TEXT_COLOR, font=fonts['body'])
+    draw.text((padding, footer_y + 160), '© 2024 MetaMap. この資料は参考情報であり、法的助言ではありません。', fill=(148, 163, 184), font=fonts['small'])
 
-    # Conclusion
-    story.append(Paragraph("まとめ：今すぐ導入を検討しませんか？", heading_style))
-    story.append(Paragraph("SSI技術の導入により、Web資産の真正性を証明し、信頼性を飛躍的に向上させることができます。無料診断から始めて、まずは現在のリスクを評価しましょう。", normal_style))
-    story.append(Spacer(1, 12))
+    return img
 
-    # CTA
-    cta_style = ParagraphStyle(
-        'CTA',
-        parent=normal_style,
-        fontSize=14,
-        alignment=1,
-        textColor='#3498db',
-        fontName='Helvetica-Bold'
-    )
-    story.append(Paragraph("無料診断Auditorで今すぐリスク分析を開始！<br/>5分で完了するレポートで、導入の価値を実感してください。", cta_style))
-    story.append(Spacer(1, 24))
 
-    # Footer
-    footer_style = ParagraphStyle(
-        'Footer',
-        parent=normal_style,
-        fontSize=10,
-        alignment=1,
-        textColor='#7f8c8d'
-    )
-    story.append(Paragraph("© 2024 MetaMap. All rights reserved.<br/>この資料は参考情報であり、法的助言ではありません。", footer_style))
+def generate_pdf():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    font_path = find_font()
+    if font_path is None:
+        raise FileNotFoundError('Japanese font not found in Windows Fonts directory.')
 
-    doc.build(story)
-    print("PDF created successfully")
+    fonts = build_fonts(font_path)
+    page1 = create_page_one(fonts)
+    page2 = create_page_two(fonts)
+    page1.save(PDF_PATH, 'PDF', resolution=300, save_all=True, append_images=[page2])
+    print('PDF generated successfully at:', PDF_PATH)
 
-if __name__ == "__main__":
-    create_pdf()
+
+if __name__ == '__main__':
+    generate_pdf()
